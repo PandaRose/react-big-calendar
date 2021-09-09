@@ -107,6 +107,7 @@ class DateContentRow extends React.Component {
       className,
       selected,
       selectable,
+      selection,
       renderForMeasure,
 
       accessors,
@@ -159,6 +160,7 @@ class DateContentRow extends React.Component {
           getNow={getNow}
           rtl={rtl}
           range={range}
+          selection={selection}
           selectable={selectable}
           container={this.getContainer}
           getters={getters}
@@ -214,6 +216,7 @@ DateContentRow.propTypes = {
   renderHeader: PropTypes.func,
 
   container: PropTypes.func,
+  selection: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   selected: PropTypes.object,
   selectable: PropTypes.oneOf([true, false, 'ignoreEvents']),
   longPressThreshold: PropTypes.number,

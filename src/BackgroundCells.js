@@ -39,15 +39,27 @@ class BackgroundCells extends React.Component {
       getters,
       date: currentDate,
       components: { dateCellWrapper: Wrapper },
+      selection = [],
     } = this.props
     let { selecting, startIdx, endIdx } = this.state
     let current = getNow()
+
+    if (!selection.length) {
+      selection = null
+    }
 
     return (
       <div className="rbc-row-bg">
         {range.map((date, index) => {
           let selected = selecting && index >= startIdx && index <= endIdx
           const { className, style } = getters.dayProp(date)
+
+          if (
+            selection &&
+            dates.inRange(date, new Date(selection[0]), new Date(selection[1]))
+          ) {
+            selected = true
+          }
 
           return (
             <Wrapper key={index} value={date} range={range}>
@@ -175,6 +187,7 @@ BackgroundCells.propTypes = {
   container: PropTypes.func,
   dayPropGetter: PropTypes.func,
   selectable: PropTypes.oneOf([true, false, 'ignoreEvents']),
+  selection: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   longPressThreshold: PropTypes.number,
 
   onSelectSlot: PropTypes.func.isRequired,

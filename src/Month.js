@@ -101,6 +101,7 @@ class MonthView extends React.Component {
       selectable,
       getNow,
       selected,
+      selection,
       date,
       localizer,
       longPressThreshold,
@@ -127,6 +128,7 @@ class MonthView extends React.Component {
         events={events}
         maxRows={showAllEvents ? Infinity : rowLimit}
         selected={selected}
+        selection={selection}
         selectable={selectable}
         components={components}
         accessors={accessors}
@@ -339,6 +341,7 @@ MonthView.propTypes = {
   getters: PropTypes.object.isRequired,
   localizer: PropTypes.object.isRequired,
 
+  selection: PropTypes.oneOfType([PropTypes.string, PropTypes.array]),
   selected: PropTypes.object,
   selectable: PropTypes.oneOf([true, false, 'ignoreEvents']),
   longPressThreshold: PropTypes.number,
